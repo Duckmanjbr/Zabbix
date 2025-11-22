@@ -2,7 +2,7 @@ zabbix_export:
   version: '7.2'
   template_groups:
     - uuid: 67923101113342d3b2c44f3060fda704
-      name: 'Mining Devices'
+      name: 'Crypto Mining Devices'
     - uuid: 3c9aa32caa13426fafa17f32699b1aa4
       name: Templates/Custom
   templates:
