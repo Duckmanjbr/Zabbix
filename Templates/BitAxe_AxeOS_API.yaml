@@ -1,5 +1,5 @@
 zabbix_export:
-  version: '7.2'
+  version: '7.0'
   template_groups:
     - uuid: 67923101113342d3b2c44f3060fda704
       name: 'Crypto Mining Devices'
