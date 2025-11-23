@@ -1,0 +1,450 @@
+zabbix_export:
+  version: '7.0'
+  template_groups:
+    - uuid: 67923101113342d3b2c44f3060fda704
+      name: 'Crypto Mining Devices'
+    - uuid: 7d1cee7797db4778a26a244c348ff888
+      name: Duckmansworld
+    - uuid: 3c9aa32caa13426fafa17f32699b1aa4
+      name: Templates/Custom
+  templates:
+    - uuid: fb7920fcd8bf46dbb8caa772f63d7620
+      template: BitAxe_AxeOS_SuperHex
+      name: BitAxe_AxeOS_SuperHex
+      description: |
+        This template uses the BitAxe API to fetch system information for monitoring.
+         API Endpoint: http://{HOST.IP}/api/system/info
+
+        Ensure the device is accessible and the API is enabled.
+      vendor:
+        name: Bitaxe
+        version: 7.0.x
+      groups:
+        - name: 'Crypto Mining Devices'
+        - name: Duckmansworld
+        - name: Templates/Custom
+      items:
+        - uuid: 8b4e7b56d83f4c19af5fa83fe607741a
+          name: 'BitAxe ASIC Count'
+          type: HTTP_AGENT
+          key: bitaxe.asic.count
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.asicCount
+          url: 'http://{HOST.IP}/api/system/info'
+        - uuid: 08edc240226a4c56bd4ae5db7579e127
+          name: 'BitAxe ASIC Model'
+          type: HTTP_AGENT
+          key: bitaxe.asic.model
+          value_type: TEXT
+          trends: '0'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.ASICModel
+          url: 'http://{HOST.IP}/api/system/info'
+        - uuid: 858460e6bfd941a6b427ebe83baf40e7
+          name: 'BitAxe Best Difficulty'
+          type: HTTP_AGENT
+          key: bitaxe.best.diff
+          value_type: TEXT
+          trends: '0'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.bestDiff
+          url: 'http://{HOST.IP}/api/system/info'
+        - uuid: fe05ec8cb54c4755bf3058febed5721e
+          name: 'BitAxe Best Session Difficulty'
+          type: HTTP_AGENT
+          key: bitaxe.best.session.diff
+          value_type: TEXT
+          trends: '0'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.bestSessionDiff
+          url: 'http://{HOST.IP}/api/system/info'
+        - uuid: 78c9906cc105419296f9080f64e6480e
+          name: 'BitAxe Core Voltage'
+          type: HTTP_AGENT
+          key: bitaxe.core.voltage
+          value_type: FLOAT
+          units: mV
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.coreVoltageActual
+          url: 'http://{HOST.IP}/api/system/info'
+        - uuid: 76f25afdc98040808f40803f95f9f8e6
+          name: 'BitAxe Using Fallback Stratum'
+          type: HTTP_AGENT
+          key: bitaxe.fallback.stratum
+          value_type: TEXT
+          trends: '0'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.isUsingFallbackStratum
+          url: 'http://{HOST.IP}/api/system/info'
+          triggers:
+            - uuid: 72c3bc04d4dc49cb90c7909f8690ac2d
+              expression: last(/BitAxe_AxeOS_SuperHex/bitaxe.fallback.stratum)=1
+              name: 'BitAxe Using Fallback Stratum'
+              priority: AVERAGE
+        - uuid: 6d065e6c13274e8ebe94b27417d5e055
+          name: 'BitAxe Fan RPM'
+          type: HTTP_AGENT
+          key: bitaxe.fanrpm
+          value_type: FLOAT
+          units: rpm
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.fanrpm
+          url: 'http://{HOST.IP}/api/system/info'
+        - uuid: df90b5f5ad394385821325f5ac1d0416
+          name: 'BitAxe Fan Speed'
+          type: HTTP_AGENT
+          key: bitaxe.fanspeed
+          value_type: FLOAT
+          units: '%'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.fanspeed
+          url: 'http://{HOST.IP}/api/system/info'
+        - uuid: 076ca69273674c5b8757deec285d7eed
+          name: 'BitAxe Free Heap'
+          type: HTTP_AGENT
+          key: bitaxe.free.heap
+          value_type: FLOAT
+          units: B
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.freeHeap
+          url: 'http://{HOST.IP}/api/system/info'
+        - uuid: ed7fce9f5816400ea16aeebdb4190126
+          name: 'BitAxe Frequency'
+          type: HTTP_AGENT
+          key: bitaxe.frequency
+          value_type: FLOAT
+          units: MHz
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.frequency
+          url: 'http://{HOST.IP}/api/system/info'
+        - uuid: edb53fb26cde4f71a9da3e73b8e0c05e
+          name: 'Bitaxe Hashrate'
+          type: HTTP_AGENT
+          key: bitaxe.hashrate
+          value_type: FLOAT
+          units: TB/s
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.hashRate
+            - type: MULTIPLIER
+              parameters:
+                - '0.001'
+          url: 'http://{HOST.IP}/api/system/info'
+        - uuid: b75fbe4b358a4e0b9501e0f444600f0f
+          name: 'BitAxe Hostname'
+          type: HTTP_AGENT
+          key: bitaxe.hostname
+          value_type: TEXT
+          trends: '0'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.hostname
+          url: 'http://{HOST.IP}/api/system/info'
+          triggers:
+            - uuid: b2c0cb919cd9489c92c06c6de0c1849a
+              expression: change(/BitAxe_AxeOS_SuperHex/bitaxe.hostname)=1
+              name: 'Hostname Changed'
+              priority: WARNING
+        - uuid: 57a70f986b2143be8abe89c6c2cc66ae
+          name: 'BitAxe MAC Address'
+          type: HTTP_AGENT
+          key: bitaxe.mac
+          value_type: TEXT
+          trends: '0'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.macAddr
+          url: 'http://{HOST.IP}/api/system/info'
+        - uuid: b5e21aefcb5b4f2f8d0632434dee27f5
+          name: 'BitAxe Max Power'
+          type: HTTP_AGENT
+          key: bitaxe.max.power
+          value_type: FLOAT
+          units: W
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.maxPower
+          url: 'http://{HOST.IP}/api/system/info'
+        - uuid: a185d842a6864db7a87169b6c4eba124
+          name: 'Bitaxe Overheat_Mode'
+          type: HTTP_AGENT
+          key: bitaxe.overheat_mode
+          value_type: FLOAT
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.overheat_mode
+          url: 'http://{HOST.IP}/api/system/info'
+          triggers:
+            - uuid: c81d36fea18d47e4bf4269987d2e080c
+              expression: last(/BitAxe_AxeOS_SuperHex/bitaxe.overheat_mode)=1
+              name: BitAxe_Overheat
+              priority: DISASTER
+              description: 'Bitaxe exceeded high temperature threshold, check cooling!'
+        - uuid: 0f0796dd1c6948ae9226562615c24f26
+          name: 'BitAxe Power Consumption'
+          type: HTTP_AGENT
+          key: bitaxe.power
+          value_type: FLOAT
+          units: W
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.power
+          url: 'http://{HOST.IP}/api/system/info'
+          triggers:
+            - uuid: 6192c6ba53734deba1c74779966ed367
+              expression: 'avg(/BitAxe_AxeOS_SuperHex/bitaxe.power,{$BITAXE.POWER.HIGH.SEC})>{$BITAXE.POWER.HIGH}'
+              name: 'Power Consumption High> {$BITAXE.POWER.HIGH}W'
+              priority: HIGH
+            - uuid: d9aae107ab484c47ad028bafcb8fd7de
+              expression: 'avg(/BitAxe_AxeOS_SuperHex/bitaxe.power,{$BITAXE.POWER.HIGH.SEC})>{$BITAXE.POWER.WARNING}'
+              name: 'Power Consumption Warning > {$BITAXE.POWER.WARNING}W'
+              priority: WARNING
+              dependencies:
+                - name: 'Power Consumption High> {$BITAXE.POWER.HIGH}W'
+                  expression: 'avg(/BitAxe_AxeOS_SuperHex/bitaxe.power,{$BITAXE.POWER.HIGH.SEC})>{$BITAXE.POWER.HIGH}'
+        - uuid: 525571d307ec4521ac6278424447d506
+          name: 'BitAxe Shares Accepted'
+          type: HTTP_AGENT
+          key: bitaxe.shares.accepted
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.sharesAccepted
+          url: 'http://{HOST.IP}/api/system/info'
+        - uuid: 154ff0de7a2344d0a46ea22b4ec5bf7e
+          name: 'BitAxe Shares Rejected'
+          type: HTTP_AGENT
+          key: bitaxe.shares.rejected
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.sharesRejected
+          url: 'http://{HOST.IP}/api/system/info'
+        - uuid: 1b80a95c07ae44c5bdaa3146d2f6181a
+          name: 'BitAxe SSID'
+          type: HTTP_AGENT
+          key: bitaxe.ssid
+          value_type: TEXT
+          trends: '0'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.ssid
+          url: 'http://{HOST.IP}/api/system/info'
+        - uuid: cf63f48e518e489f90157d565e21d2a0
+          name: 'BitAxe Stratum Difficulty'
+          type: HTTP_AGENT
+          key: bitaxe.stratum.diff
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.stratumDiff
+          url: 'http://{HOST.IP}/api/system/info'
+        - uuid: 2fa03d7ad9664a86b06075ecde71ee0b
+          name: 'BitAxe Stratum URL'
+          type: HTTP_AGENT
+          key: bitaxe.stratum.url
+          value_type: TEXT
+          trends: '0'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.stratumURL
+          url: 'http://{HOST.IP}/api/system/info'
+        - uuid: 8fa7dad0832a46e4acfbf044ae4063f4
+          name: 'Bitaxe Temperature'
+          type: HTTP_AGENT
+          key: bitaxe.temp
+          value_type: FLOAT
+          units: °C
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.temp
+          url: 'http://{HOST.IP}/api/system/info'
+          triggers:
+            - uuid: dbc058eb73a14e5cb34151546b413b45
+              expression: 'avg(/BitAxe_AxeOS_SuperHex/bitaxe.temp,{$BITAXE.TEMP.HIGH.SEC})>{$BITAXE.TEMP.HIGH}'
+              name: 'Temperature > {$BITAXE.TEMP.HIGH}C'
+              priority: HIGH
+            - uuid: d79989c64f5a4817bc8ec8d981851504
+              expression: 'avg(/BitAxe_AxeOS_SuperHex/bitaxe.temp,{$BITAXE.TEMP.WARNING.SEC})={$BITAXE.TEMP.WARNING}'
+              name: 'Temperature > {$BITAXE.TEMP.WARNING}C'
+              priority: WARNING
+              dependencies:
+                - name: 'Temperature > {$BITAXE.TEMP.HIGH}C'
+                  expression: 'avg(/BitAxe_AxeOS_SuperHex/bitaxe.temp,{$BITAXE.TEMP.HIGH.SEC})>{$BITAXE.TEMP.HIGH}'
+        - uuid: 13914e38e8574733bc1305738cc67da8
+          name: 'BitAxe Uptime'
+          type: HTTP_AGENT
+          key: bitaxe.uptime
+          units: sec
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.uptimeSeconds
+          url: 'http://{HOST.IP}/api/system/info'
+          triggers:
+            - uuid: ce7209a9fa514e29972ec7c404119c6f
+              expression: last(/BitAxe_AxeOS_SuperHex/bitaxe.uptime)<86400
+              name: 'Device Rebooted'
+              priority: WARNING
+        - uuid: 9d57eccfe4984637a5661dd75054e387
+          name: 'Bitaxe UpTime'
+          type: HTTP_AGENT
+          key: bitaxe.uptimeSeconds
+          value_type: FLOAT
+          units: weeks
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.uptimeSeconds
+            - type: MULTIPLIER
+              parameters:
+                - '1.653439153439E-6'
+          url: 'http://{HOST.IP}/api/system/info'
+        - uuid: 1bbb544bf2d84206ab6ddecbd7f31fae
+          name: 'BitAxe Version'
+          type: HTTP_AGENT
+          key: bitaxe.version
+          value_type: TEXT
+          trends: '0'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.version
+          url: 'http://{HOST.IP}/api/system/info'
+          triggers:
+            - uuid: 5c4d8e37e42642c9bcac63b03e88c7b4
+              expression: change(/BitAxe_AxeOS_SuperHex/bitaxe.version)=1
+              name: 'Software Version Changed'
+              priority: WARNING
+        - uuid: 9630f4483f8f4a109c2836f142ce6424
+          name: 'BitAxe Voltage'
+          type: HTTP_AGENT
+          key: bitaxe.voltage
+          value_type: FLOAT
+          units: mV
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.voltage
+          url: 'http://{HOST.IP}/api/system/info'
+        - uuid: 839bc895e60647c09163abbb68a720d4
+          name: 'BitAxe VR Temperature'
+          type: HTTP_AGENT
+          key: bitaxe.vr.temp
+          value_type: FLOAT
+          units: C
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.vrTemp
+          url: 'http://{HOST.IP}/api/system/info'
+        - uuid: 23dc12277a124ae7a2e10c9d2ee5fe69
+          name: 'BitAxe WiFi RSSI'
+          type: HTTP_AGENT
+          key: bitaxe.wifi.rssi
+          value_type: FLOAT
+          units: dBm
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.wifiRSSI
+          url: 'http://{HOST.IP}/api/system/info'
+          triggers:
+            - uuid: 993ffaad5907453b957d338119043924
+              expression: 'avg(/BitAxe_AxeOS_SuperHex/bitaxe.wifi.rssi,{$BITAXE.WIFI.RSSI.LOW.SEC})<{$BITAXE.WIFI.RSSI.LOW}'
+              name: 'WiFi RSSI < {$BITAXE.WIFI.RSSI.LOW}dBm'
+              priority: HIGH
+            - uuid: 707f918a01e4462db25316f167285ea6
+              expression: 'avg(/BitAxe_AxeOS_SuperHex/bitaxe.wifi.rssi,{$BITAXE.WIFI.RSSI.WARNING.SEC})<{$BITAXE.WIFI.RSSI.WARNING}'
+              name: 'WiFi RSSI < {$BITAXE.WIFI.RSSI.WARNING}dBm'
+              priority: WARNING
+              dependencies:
+                - name: 'WiFi RSSI < {$BITAXE.WIFI.RSSI.LOW}dBm'
+                  expression: 'avg(/BitAxe_AxeOS_SuperHex/bitaxe.wifi.rssi,{$BITAXE.WIFI.RSSI.LOW.SEC})<{$BITAXE.WIFI.RSSI.LOW}'
+        - uuid: c965c2144e0e4b9a8c8a5eb2273dbd8e
+          name: 'BitAxe WiFi Status'
+          type: HTTP_AGENT
+          key: bitaxe.wifi.status
+          value_type: TEXT
+          trends: '0'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.wifiStatus
+          url: 'http://{HOST.IP}/api/system/info'
+      tags:
+        - tag: class
+          value: crypto
+        - tag: target
+          value: Bitaxe
+      macros:
+        - macro: '{$BITAXE.POWER.HIGH}'
+          value: '110'
+          description: 'Power consumption high trigger threshold (W)'
+        - macro: '{$BITAXE.POWER.HIGH.SEC}'
+          value: '900'
+          description: 'Power consumption high trigger avg threshold in seconds'
+        - macro: '{$BITAXE.POWER.WARNING}'
+          value: '103'
+          description: 'Power consumption warning trigger threshold (W)'
+        - macro: '{$BITAXE.POWER.WARNING.SEC}'
+          value: '900'
+          description: 'Power consumption warning trigger threshold in seconds'
+        - macro: '{$BITAXE.TEMP.HIGH}'
+          value: '70'
+          description: 'Temperature high trigger threshold (C)'
+        - macro: '{$BITAXE.TEMP.HIGH.SEC}'
+          value: '900'
+          description: 'Temperature high trigger threshold in seconds'
+        - macro: '{$BITAXE.TEMP.WARNING}'
+          value: '60'
+          description: 'Temperature warning trigger threshold (C)'
+        - macro: '{$BITAXE.TEMP.WARNING.SEC}'
+          value: '900'
+          description: 'Temperature warning trigger threshold in seconds'
+        - macro: '{$BITAXE.WIFI.RSSI.LOW}'
+          value: '-70'
+          description: 'WiFi RSSI low trigger threshold (dBm)'
+        - macro: '{$BITAXE.WIFI.RSSI.LOW.SEC}'
+          value: '900'
+          description: 'WiFi RSSI low trigger threshold in seconds'
+        - macro: '{$BITAXE.WIFI.RSSI.WARNING}'
+          value: '-60'
+          description: 'WiFi RSSI warning trigger threshold (dBm)'
+        - macro: '{$BITAXE.WIFI.RSSI.WARNING.SEC}'
+          value: '900'
+          description: 'WiFi RSSI warning trigger threshold in seconds'
+  triggers:
+    - uuid: 71b09de6ed7e42ff808c7fa742aca38b
+      expression: 'last(/BitAxe_AxeOS_SuperHex/bitaxe.shares.rejected)/last(/BitAxe_AxeOS_SuperHex/bitaxe.shares.accepted)*100 > 1'
+      name: 'Shares Rejected Failure Rate'
+      priority: WARNING
