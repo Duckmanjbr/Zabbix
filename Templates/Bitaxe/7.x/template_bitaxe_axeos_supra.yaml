@@ -6,7 +6,7 @@ zabbix_export:
     - uuid: 3c9aa32caa13426fafa17f32699b1aa4
       name: Templates/Custom
   templates:
-    - uuid: b28b8f1f14e4sdgfad91a0410bfcc42c
+    - uuid: 3ce5a268d60046e99122da223cd117f3
       template: BitAxe_AxeOS_Supra
       name: BitAxe_AxeOS_Supra
       description: |
