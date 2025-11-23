@@ -6,7 +6,7 @@ zabbix_export:
     - uuid: 3c9aa32caa13426fafa17f32699b1aa4
       name: Templates/Custom
   templates:
-    - uuid: 3ce5a268d60046e99122da223cd117f3
+    - uuid: 7ac90882accf4c7b9553c30bc5d45e90
       template: BitAxe_AxeOS_Supra
       name: BitAxe_AxeOS_Supra
       description: |
@@ -21,7 +21,7 @@ zabbix_export:
         - name: 'Crypto Mining Devices'
         - name: Templates/Custom
       items:
-        - uuid: a527094cb8684c2d9227f3333f8a63db
+        - uuid: 365af7fb0ddf4746a2162db9990960a2
           name: 'BitAxe ASIC Count'
           type: HTTP_AGENT
           key: bitaxe.asic.count
@@ -30,7 +30,7 @@ zabbix_export:
               parameters:
                 - $.asicCount
           url: 'http://{HOST.IP}/api/system/info'
-        - uuid: 0be30155b38441fc92d62fb71c9af5d3
+        - uuid: be8166f0eb914af09c32c095d4222c9e
           name: 'BitAxe ASIC Model'
           type: HTTP_AGENT
           key: bitaxe.asic.model
@@ -41,7 +41,7 @@ zabbix_export:
               parameters:
                 - $.ASICModel
           url: 'http://{HOST.IP}/api/system/info'
-        - uuid: cac3aedcf96c48308ae1cb811a313307
+        - uuid: 61f9140ae3cd4085b7519fe748a552e8
           name: 'BitAxe Best Difficulty'
           type: HTTP_AGENT
           key: bitaxe.best.diff
@@ -52,7 +52,7 @@ zabbix_export:
               parameters:
                 - $.bestDiff
           url: 'http://{HOST.IP}/api/system/info'
-        - uuid: 835cd39e49824a73b78903dc5a95c1fe
+        - uuid: 51f53141ebcb41e2ac587ade4e57a489
           name: 'BitAxe Best Session Difficulty'
           type: HTTP_AGENT
           key: bitaxe.best.session.diff
@@ -63,7 +63,7 @@ zabbix_export:
               parameters:
                 - $.bestSessionDiff
           url: 'http://{HOST.IP}/api/system/info'
-        - uuid: 907d69a41eda4da6a7a3f62bf7c87ca4
+        - uuid: 054559fd3a2d4bf59a418717ffc9dd73
           name: 'BitAxe Core Voltage'
           type: HTTP_AGENT
           key: bitaxe.core.voltage
@@ -74,7 +74,7 @@ zabbix_export:
               parameters:
                 - $.coreVoltageActual
           url: 'http://{HOST.IP}/api/system/info'
-        - uuid: 1ee09b5f016c46e8bd357e351463d281
+        - uuid: 480b0feb278e44afb1054644c99744f1
           name: 'BitAxe Using Fallback Stratum'
           type: HTTP_AGENT
           key: bitaxe.fallback.stratum
@@ -86,11 +86,11 @@ zabbix_export:
                 - $.isUsingFallbackStratum
           url: 'http://{HOST.IP}/api/system/info'
           triggers:
-            - uuid: 5551b0e773c147179cff823e6cb05cb7
-              expression: last(/BitAxe_AxeOS/bitaxe.fallback.stratum)=1
+            - uuid: b81ec17ca27f4e2d952e973446ea32ae
+              expression: last(/BitAxe_AxeOS_Supra/bitaxe.fallback.stratum)=1
               name: 'BitAxe Using Fallback Stratum'
               priority: AVERAGE
-        - uuid: 0125377b6e424aed9e70fb0a62788e4c
+        - uuid: e0218b7269104b81ae1d4e95278be552
           name: 'BitAxe Fan RPM'
           type: HTTP_AGENT
           key: bitaxe.fanrpm
@@ -101,7 +101,7 @@ zabbix_export:
               parameters:
                 - $.fanrpm
           url: 'http://{HOST.IP}/api/system/info'
-        - uuid: 6ddcbfffb7c5419a99a66db4f1160882
+        - uuid: f5463fba6073415b95ee1435d18c78a1
           name: 'BitAxe Fan Speed'
           type: HTTP_AGENT
           key: bitaxe.fanspeed
@@ -112,7 +112,7 @@ zabbix_export:
               parameters:
                 - $.fanspeed
           url: 'http://{HOST.IP}/api/system/info'
-        - uuid: 9e13849eebae43cc9bf08db89fa8ddab
+        - uuid: 58b424f90f114348823782c5a6ff32e3
           name: 'BitAxe Free Heap'
           type: HTTP_AGENT
           key: bitaxe.free.heap
@@ -123,7 +123,7 @@ zabbix_export:
               parameters:
                 - $.freeHeap
           url: 'http://{HOST.IP}/api/system/info'
-        - uuid: 39dbff1838304e26ae3f842948a1d72c
+        - uuid: 6deafa436e8b430bab258af5af3329b6
           name: 'BitAxe Frequency'
           type: HTTP_AGENT
           key: bitaxe.frequency
@@ -134,7 +134,7 @@ zabbix_export:
               parameters:
                 - $.frequency
           url: 'http://{HOST.IP}/api/system/info'
-        - uuid: 0a2d6f3f94fa4dfa882276f67cf1e9c6
+        - uuid: 42fc87fe455a4e2ba10d4be2c5b5312c
           name: 'Bitaxe Hashrate'
           type: HTTP_AGENT
           key: bitaxe.hashrate
@@ -148,7 +148,7 @@ zabbix_export:
               parameters:
                 - '0.001'
           url: 'http://{HOST.IP}/api/system/info'
-        - uuid: 837e177ac23143059416bb9e5175e6b0
+        - uuid: 250796956bf24c468a3c2af70ebd4eb0
           name: 'BitAxe Hostname'
           type: HTTP_AGENT
           key: bitaxe.hostname
@@ -160,11 +160,11 @@ zabbix_export:
                 - $.hostname
           url: 'http://{HOST.IP}/api/system/info'
           triggers:
-            - uuid: 92d7c35a6ed24dbc9ef69b1e7267c1b0
-              expression: change(/BitAxe_AxeOS/bitaxe.hostname)=1
+            - uuid: 8bd9837aca614a299fe2869a121e1669
+              expression: change(/BitAxe_AxeOS_Supra/bitaxe.hostname)=1
               name: 'Hostname Changed'
               priority: WARNING
-        - uuid: d88824e007d34ce5a64c03012e2084bb
+        - uuid: 5b93cb86cc4040febd33dad8ee056039
           name: 'BitAxe MAC Address'
           type: HTTP_AGENT
           key: bitaxe.mac
@@ -175,7 +175,7 @@ zabbix_export:
               parameters:
                 - $.macAddr
           url: 'http://{HOST.IP}/api/system/info'
-        - uuid: 2e7ec6f32d4341f7ba900e3b2047c666
+        - uuid: 2cfa24eef20b4dd4b9b069886a083ebe
           name: 'BitAxe Max Power'
           type: HTTP_AGENT
           key: bitaxe.max.power
@@ -186,7 +186,7 @@ zabbix_export:
               parameters:
                 - $.maxPower
           url: 'http://{HOST.IP}/api/system/info'
-        - uuid: 2688f2f0cd8f4025acc60b4ff20a5dab
+        - uuid: 252791f02df747d6a2295825dea03cfc
           name: 'Bitaxe Overheat_Mode'
           type: HTTP_AGENT
           key: bitaxe.overheat_mode
@@ -197,12 +197,12 @@ zabbix_export:
                 - $.overheat_mode
           url: 'http://{HOST.IP}/api/system/info'
           triggers:
-            - uuid: 55eb089f4c7d42a2aa51b405d93713a2
-              expression: last(/BitAxe_AxeOS/bitaxe.overheat_mode)=1
+            - uuid: ffdf790ae6f24f5e9695cd2266a5dca6
+              expression: last(/BitAxe_AxeOS_Supra/bitaxe.overheat_mode)=1
               name: BitAxe_Overheat
               priority: DISASTER
               description: 'Bitaxe exceeded high temperature threshold, check cooling!'
-        - uuid: 404c79e34b8f46bfbf23e7f1271d9243
+        - uuid: 9e8cfa16601e4aab98c89cea0d4c72ee
           name: 'BitAxe Power Consumption'
           type: HTTP_AGENT
           key: bitaxe.power
@@ -214,18 +214,18 @@ zabbix_export:
                 - $.power
           url: 'http://{HOST.IP}/api/system/info'
           triggers:
-            - uuid: ddb9e6c9cbb54875af52d4dda7288259
-              expression: 'avg(/BitAxe_AxeOS/bitaxe.power,{$BITAXE.POWER.HIGH.SEC})>{$BITAXE.POWER.HIGH}'
+            - uuid: dab6a47fb2054f96b610c158f67d350e
+              expression: 'avg(/BitAxe_AxeOS_Supra/bitaxe.power,{$BITAXE.POWER.HIGH.SEC})>{$BITAXE.POWER.HIGH}'
               name: 'Power Consumption High> {$BITAXE.POWER.HIGH}W'
               priority: HIGH
-            - uuid: e87dde550a1f471d8a4669aa75fa900f
-              expression: 'avg(/BitAxe_AxeOS/bitaxe.power,{$BITAXE.POWER.HIGH.SEC})>{$BITAXE.POWER.WARNING}'
+            - uuid: 4db21c44b55b4da895a85f26b6b2d514
+              expression: 'avg(/BitAxe_AxeOS_Supra/bitaxe.power,{$BITAXE.POWER.HIGH.SEC})>{$BITAXE.POWER.WARNING}'
               name: 'Power Consumption Warning> {$BITAXE.POWER.WARNING}W'
               priority: WARNING
               dependencies:
                 - name: 'Power Consumption High> {$BITAXE.POWER.HIGH}W'
-                  expression: 'avg(/BitAxe_AxeOS/bitaxe.power,{$BITAXE.POWER.HIGH.SEC})>{$BITAXE.POWER.HIGH}'
-        - uuid: 7d66465129b34f4cad348d536abd5fa8
+                  expression: 'avg(/BitAxe_AxeOS_Supra/bitaxe.power,{$BITAXE.POWER.HIGH.SEC})>{$BITAXE.POWER.HIGH}'
+        - uuid: 4db0591f9f554622ad9f897567173820
           name: 'BitAxe Shares Accepted'
           type: HTTP_AGENT
           key: bitaxe.shares.accepted
@@ -234,7 +234,7 @@ zabbix_export:
               parameters:
                 - $.sharesAccepted
           url: 'http://{HOST.IP}/api/system/info'
-        - uuid: 8a17c18646ad4a6cac1e78fe42c7d328
+        - uuid: bbb33ad287a4463d8d5a770895f2228c
           name: 'BitAxe Shares Rejected'
           type: HTTP_AGENT
           key: bitaxe.shares.rejected
@@ -243,7 +243,7 @@ zabbix_export:
               parameters:
                 - $.sharesRejected
           url: 'http://{HOST.IP}/api/system/info'
-        - uuid: a6a147f294c4450dbf7a6020b6f3e0a0
+        - uuid: 177a4d33250d42bba82ae7923d004eb3
           name: 'BitAxe SSID'
           type: HTTP_AGENT
           key: bitaxe.ssid
@@ -254,7 +254,7 @@ zabbix_export:
               parameters:
                 - $.ssid
           url: 'http://{HOST.IP}/api/system/info'
-        - uuid: 659a4fa539134c9e9c0b4c93d48806f8
+        - uuid: 148cab8bee8b4f4aa92a9909a6e861cd
           name: 'BitAxe Stratum Difficulty'
           type: HTTP_AGENT
           key: bitaxe.stratum.diff
@@ -263,7 +263,7 @@ zabbix_export:
               parameters:
                 - $.stratumDiff
           url: 'http://{HOST.IP}/api/system/info'
-        - uuid: 907fefc122be4a48b2911dfcdb3fc463
+        - uuid: caed9f4496c940c08a18e150bf81347e
           name: 'BitAxe Stratum URL'
           type: HTTP_AGENT
           key: bitaxe.stratum.url
@@ -274,7 +274,7 @@ zabbix_export:
               parameters:
                 - $.stratumURL
           url: 'http://{HOST.IP}/api/system/info'
-        - uuid: f7b7e250d1804c13bd59c06e0ea21cd8
+        - uuid: fc57ef385bd144ecadb3d7a91faff6cd
           name: 'Bitaxe Temperature'
           type: HTTP_AGENT
           key: bitaxe.temp
@@ -286,18 +286,18 @@ zabbix_export:
                 - $.temp
           url: 'http://{HOST.IP}/api/system/info'
           triggers:
-            - uuid: 30a4b3e800874d05a21763ab5e08f646
-              expression: 'avg(/BitAxe_AxeOS/bitaxe.temp,{$BITAXE.TEMP.HIGH.SEC})>{$BITAXE.TEMP.HIGH}'
+            - uuid: 25033de1c47b42f89ea534f707a72a9c
+              expression: 'avg(/BitAxe_AxeOS_Supra/bitaxe.temp,{$BITAXE.TEMP.HIGH.SEC})>{$BITAXE.TEMP.HIGH}'
               name: 'Temperature > {$BITAXE.TEMP.HIGH}C'
               priority: HIGH
-            - uuid: 4e399c65e54f4602bd271f300caf9a61
-              expression: 'avg(/BitAxe_AxeOS/bitaxe.temp,{$BITAXE.TEMP.WARNING.SEC})={$BITAXE.TEMP.WARNING}'
+            - uuid: 51d1f108c45249ac81d240cb7dadbbec
+              expression: 'avg(/BitAxe_AxeOS_Supra/bitaxe.temp,{$BITAXE.TEMP.WARNING.SEC})={$BITAXE.TEMP.WARNING}'
               name: 'Temperature > {$BITAXE.TEMP.WARNING}C'
               priority: WARNING
               dependencies:
                 - name: 'Temperature > {$BITAXE.TEMP.HIGH}C'
-                  expression: 'avg(/BitAxe_AxeOS/bitaxe.temp,{$BITAXE.TEMP.HIGH.SEC})>{$BITAXE.TEMP.HIGH}'
-        - uuid: acdea76e6ef0435385e4ab858e330e74
+                  expression: 'avg(/BitAxe_AxeOS_Supra/bitaxe.temp,{$BITAXE.TEMP.HIGH.SEC})>{$BITAXE.TEMP.HIGH}'
+        - uuid: ab42e18bb2be441192704d038d57bab3
           name: 'BitAxe Uptime'
           type: HTTP_AGENT
           key: bitaxe.uptime
@@ -308,11 +308,11 @@ zabbix_export:
                 - $.uptimeSeconds
           url: 'http://{HOST.IP}/api/system/info'
           triggers:
-            - uuid: 74b58d679cce4254acd29186cefc6548
-              expression: last(/BitAxe_AxeOS/bitaxe.uptime)<86400
+            - uuid: d691dcf6f447464daff1f93f33e08160
+              expression: last(/BitAxe_AxeOS_Supra/bitaxe.uptime)<86400
               name: 'Device Rebooted'
               priority: WARNING
-        - uuid: 8f8cdd2e2e8f4de886720a5f0e4a24f5
+        - uuid: 64bfd142ce4f47b492866f7bb6d0020e
           name: 'Bitaxe UpTime'
           type: HTTP_AGENT
           key: bitaxe.uptimeSeconds
@@ -326,7 +326,7 @@ zabbix_export:
               parameters:
                 - '1.653439153439E-6'
           url: 'http://{HOST.IP}/api/system/info'
-        - uuid: a3ec9699a480482cb1fe558993754604
+        - uuid: 0ce039a9aaa94850a4be15e37ace825a
           name: 'BitAxe Version'
           type: HTTP_AGENT
           key: bitaxe.version
@@ -338,11 +338,11 @@ zabbix_export:
                 - $.version
           url: 'http://{HOST.IP}/api/system/info'
           triggers:
-            - uuid: 96fc0ad46699486ba8d5ef36d7340acb
-              expression: change(/BitAxe_AxeOS/bitaxe.version)=1
+            - uuid: 367814a148b849cfa4a48f4a8feb9982
+              expression: change(/BitAxe_AxeOS_Supra/bitaxe.version)=1
               name: 'Software Version Changed'
               priority: WARNING
-        - uuid: 106206ed7a9f4fd1ac70e759ba7b901b
+        - uuid: 3050d71d4ee244d889047000a640d0f9
           name: 'BitAxe Voltage'
           type: HTTP_AGENT
           key: bitaxe.voltage
@@ -353,7 +353,7 @@ zabbix_export:
               parameters:
                 - $.voltage
           url: 'http://{HOST.IP}/api/system/info'
-        - uuid: 7282b233fa1c409fa2b1330c6d7a1bb3
+        - uuid: 7fb67511336a44e5a6cfcf36f8beb5ba
           name: 'BitAxe VR Temperature'
           type: HTTP_AGENT
           key: bitaxe.vr.temp
@@ -364,7 +364,7 @@ zabbix_export:
               parameters:
                 - $.vrTemp
           url: 'http://{HOST.IP}/api/system/info'
-        - uuid: f1000808b99e411297a12e61a3c09812
+        - uuid: 2b70cdc945534aa0ab5b51cf107be660
           name: 'BitAxe WiFi RSSI'
           type: HTTP_AGENT
           key: bitaxe.wifi.rssi
@@ -376,18 +376,18 @@ zabbix_export:
                 - $.wifiRSSI
           url: 'http://{HOST.IP}/api/system/info'
           triggers:
-            - uuid: 1ea02ff3bf7b436d973eb9049b092cb3
-              expression: 'avg(/BitAxe_AxeOS/bitaxe.wifi.rssi,{$BITAXE.WIFI.RSSI.LOW.SEC})<{$BITAXE.WIFI.RSSI.LOW}'
+            - uuid: 864cbb5edd684508a1aba32e2c976078
+              expression: 'avg(/BitAxe_AxeOS_Supra/bitaxe.wifi.rssi,{$BITAXE.WIFI.RSSI.LOW.SEC})<{$BITAXE.WIFI.RSSI.LOW}'
               name: 'WiFi RSSI < {$BITAXE.WIFI.RSSI.LOW}dBm'
               priority: HIGH
-            - uuid: adbf7202d6064145a9eabd22299e7d42
-              expression: 'avg(/BitAxe_AxeOS/bitaxe.wifi.rssi,{$BITAXE.WIFI.RSSI.WARNING.SEC})<{$BITAXE.WIFI.RSSI.WARNING}'
+            - uuid: 69d705e560e3487a9d27fda2c3805c93
+              expression: 'avg(/BitAxe_AxeOS_Supra/bitaxe.wifi.rssi,{$BITAXE.WIFI.RSSI.WARNING.SEC})<{$BITAXE.WIFI.RSSI.WARNING}'
               name: 'WiFi RSSI < {$BITAXE.WIFI.RSSI.WARNING}dBm'
               priority: WARNING
               dependencies:
                 - name: 'WiFi RSSI < {$BITAXE.WIFI.RSSI.LOW}dBm'
-                  expression: 'avg(/BitAxe_AxeOS/bitaxe.wifi.rssi,{$BITAXE.WIFI.RSSI.LOW.SEC})<{$BITAXE.WIFI.RSSI.LOW}'
-        - uuid: b9f737573b724e9fac502d69c072f011
+                  expression: 'avg(/BitAxe_AxeOS_Supra/bitaxe.wifi.rssi,{$BITAXE.WIFI.RSSI.LOW.SEC})<{$BITAXE.WIFI.RSSI.LOW}'
+        - uuid: 0fcf6a2a419d4ccf80e19207ff038560
           name: 'BitAxe WiFi Status'
           type: HTTP_AGENT
           key: bitaxe.wifi.status
@@ -405,13 +405,13 @@ zabbix_export:
           value: Bitaxe
       macros:
         - macro: '{$BITAXE.POWER.HIGH}'
-          value: '30'
+          value: '35'
           description: 'Power consumption high trigger threshold (W)'
         - macro: '{$BITAXE.POWER.HIGH.SEC}'
           value: '900'
           description: 'Power consumption high trigger avg threshold in seconds'
         - macro: '{$BITAXE.POWER.WARNING}'
-          value: '27'
+          value: '29'
           description: 'Power consumption warning trigger threshold (W)'
         - macro: '{$BITAXE.POWER.WARNING.SEC}'
           value: '900'
@@ -441,7 +441,7 @@ zabbix_export:
           value: '900'
           description: 'WiFi RSSI warning trigger threshold in seconds'
   triggers:
-    - uuid: 4ccdddd9f9204d7790e977bf5a1f6ce2
-      expression: 'last(/BitAxe_AxeOS/bitaxe.shares.rejected)/last(/BitAxe_AxeOS/bitaxe.shares.accepted)*100 > 1'
+    - uuid: 05eabd59159048deb98d344e7f74c1c1
+      expression: 'last(/BitAxe_AxeOS_Supra/bitaxe.shares.rejected)/last(/BitAxe_AxeOS_Supra/bitaxe.shares.accepted)*100 > 1'
       name: 'Shares Rejected Failure Rate'
       priority: WARNING
