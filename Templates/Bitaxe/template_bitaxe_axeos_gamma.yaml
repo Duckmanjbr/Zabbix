@@ -19,7 +19,6 @@ zabbix_export:
         version: 7.0.x
       groups:
         - name: 'Crypto Mining Devices'
-        - name: Duckmansworld
         - name: Templates/Custom
       items:
         - uuid: a527094cb8684c2d9227f3333f8a63db
