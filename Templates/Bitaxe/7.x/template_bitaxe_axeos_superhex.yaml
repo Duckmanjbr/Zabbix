@@ -275,9 +275,28 @@ zabbix_export:
                 - $.stratumURL
           url: 'http://{HOST.IP}/api/system/info'
         - uuid: 8fa7dad0832a46e4acfbf044ae4063f4
-          name: 'Bitaxe Temperature'
-          type: HTTP_AGENT
+          name: 'Bitaxe ASIC Temperature'
+          type: CALCULATED
           key: bitaxe.temp
+          value_type: FLOAT
+          units: °C
+          params: '(avg(/{HOST.HOST}/bitaxe.temp1, 3m) + avg(/{HOST.HOST}/bitaxe.temp2, 3m)) / 2'
+          triggers:
+            - uuid: dbc058eb73a14e5cb34151546b413b45
+              expression: 'avg(/BitAxe_AxeOS_SuperHex/bitaxe.temp,{$BITAXE.TEMP.HIGH.SEC})>{$BITAXE.TEMP.HIGH}'
+              name: 'Temperature1 > {$BITAXE.TEMP.HIGH}C'
+              priority: HIGH
+            - uuid: d79989c64f5a4817bc8ec8d981851504
+              expression: 'avg(/BitAxe_AxeOS_SuperHex/bitaxe.temp,{$BITAXE.TEMP.WARNING.SEC})>{$BITAXE.TEMP.WARNING}'
+              name: 'Temperature1 > {$BITAXE.TEMP.WARNING}C'
+              priority: WARNING
+              dependencies:
+                - name: 'Temperature1 > {$BITAXE.TEMP.HIGH}C'
+                  expression: 'avg(/BitAxe_AxeOS_SuperHex/bitaxe.temp,{$BITAXE.TEMP.HIGH.SEC})>{$BITAXE.TEMP.HIGH}'
+        - uuid: 5931ee4cb2a84e36a273b3c67cfc720a
+          name: 'Bitaxe ASIC Temperature 1'
+          type: HTTP_AGENT
+          key: bitaxe.temp1
           value_type: FLOAT
           units: °C
           preprocessing:
@@ -285,18 +304,17 @@ zabbix_export:
               parameters:
                 - $.temp
           url: 'http://{HOST.IP}/api/system/info'
-          triggers:
-            - uuid: dbc058eb73a14e5cb34151546b413b45
-              expression: 'avg(/BitAxe_AxeOS_SuperHex/bitaxe.temp,{$BITAXE.TEMP.HIGH.SEC})>{$BITAXE.TEMP.HIGH}'
-              name: 'Temperature > {$BITAXE.TEMP.HIGH}C'
-              priority: HIGH
-            - uuid: d79989c64f5a4817bc8ec8d981851504
-              expression: 'avg(/BitAxe_AxeOS_SuperHex/bitaxe.temp,{$BITAXE.TEMP.WARNING.SEC})={$BITAXE.TEMP.WARNING}'
-              name: 'Temperature > {$BITAXE.TEMP.WARNING}C'
-              priority: WARNING
-              dependencies:
-                - name: 'Temperature > {$BITAXE.TEMP.HIGH}C'
-                  expression: 'avg(/BitAxe_AxeOS_SuperHex/bitaxe.temp,{$BITAXE.TEMP.HIGH.SEC})>{$BITAXE.TEMP.HIGH}'
+        - uuid: e4abbaf9e6a44ec7858300dc87f633b4
+          name: 'Bitaxe ASIC Temperature 2'
+          type: HTTP_AGENT
+          key: bitaxe.temp2
+          value_type: FLOAT
+          units: °C
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.temp2
+          url: 'http://{HOST.IP}/api/system/info'
         - uuid: 13914e38e8574733bc1305738cc67da8
           name: 'BitAxe Uptime'
           type: HTTP_AGENT
