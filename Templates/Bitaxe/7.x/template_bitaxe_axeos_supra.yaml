@@ -25,6 +25,7 @@ zabbix_export:
           name: 'BitAxe ASIC Count'
           type: HTTP_AGENT
           key: bitaxe.asic.count
+          status: DISABLED
           preprocessing:
             - type: JSONPATH
               parameters:
