@@ -376,7 +376,7 @@ zabbix_export:
           type: HTTP_AGENT
           key: bitaxe.vr.temp
           value_type: FLOAT
-          units: C
+          units: °C
           preprocessing:
             - type: JSONPATH
               parameters:
