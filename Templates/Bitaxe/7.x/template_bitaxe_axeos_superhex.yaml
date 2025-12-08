@@ -148,6 +148,22 @@ zabbix_export:
               parameters:
                 - '0.001'
           url: 'http://{HOST.IP}/api/system/info'
+        - uuid: 7712536d61964f38bf827d0f3e2391c6
+          name: 'Bitaxe Hashrate Error'
+          type: HTTP_AGENT
+          key: bitaxe.hashrate.error
+          value_type: FLOAT
+          units: '%'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.errorPercentage
+          url: 'http://{HOST.IP}/api/system/info'
+          triggers:
+            - uuid: 85e5a6e14bde40f492a6433d84bc7a58
+              expression: last(/BitAxe_AxeOS_Supra/bitaxe.hashrate.error)>1
+              name: 'Hashrate Error >1%'
+              priority: WARNING
         - uuid: b75fbe4b358a4e0b9501e0f444600f0f
           name: 'BitAxe Hostname'
           type: HTTP_AGENT
