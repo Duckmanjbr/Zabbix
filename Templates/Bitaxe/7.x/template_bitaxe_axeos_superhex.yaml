@@ -29,7 +29,7 @@ zabbix_export:
             - type: JSONPATH
               parameters:
                 - $.asicCount
-          url: 'http://{HOST.IP}/api/system/info'
+          url: 'http://{HOST.IP}/api/system/asic'
         - uuid: 08edc240226a4c56bd4ae5db7579e127
           name: 'BitAxe ASIC Model'
           type: HTTP_AGENT
@@ -261,7 +261,7 @@ zabbix_export:
           preprocessing:
             - type: JSONPATH
               parameters:
-                - $.stratumDiff
+                - $.poolDifficulty
           url: 'http://{HOST.IP}/api/system/info'
         - uuid: 2fa03d7ad9664a86b06075ecde71ee0b
           name: 'BitAxe Stratum URL'
