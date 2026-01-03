@@ -75,6 +75,15 @@ zabbix_export:
               parameters:
                 - $.coreVoltageActual
           url: 'http://{HOST.IP}/api/system/info'
+        - uuid: 511aaa0a5411485283ebfc2d6ed54829
+          name: 'BitAxe Efficiency'
+          type: CALCULATED
+          key: bitaxe.efficiency
+          units: J/TH
+          params: |
+            (
+            avg(/{HOST.HOST}/bitaxe.power, 3m) / avg(/{HOST.HOST}/bitaxe.hashrate, 3m)
+            )
         - uuid: 1ee09b5f016c46e8bd357e351463d281
           name: 'BitAxe Using Fallback Stratum'
           type: HTTP_AGENT
